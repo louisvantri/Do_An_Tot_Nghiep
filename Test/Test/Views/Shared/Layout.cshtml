@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from www.multipurposethemes.com/admin/eduadmin-template/main/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 17 Nov 2020 01:38:19 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="~/Template/images/favicon.ico">
+
+    <title>Hệ thống quản lý</title>
+
+    <!-- Vendors Style-->
+    <link rel="stylesheet" href="~/Template/css/vendors_css.css">
+
+    <!-- Style-->
+    <link rel="stylesheet" href="~/Template/css/style.css">
+    <link rel="stylesheet" href="~/Template/css/skin_color.css">
+    <link rel="stylesheet" href="~/js/Toast/jquery.toast.css" />
+
+</head>
+
+<body class="hold-transition light-skin sidebar-mini theme-primary">
+    <div class="wrapper">
+        <div id="loader"></div>
+
+        <header class="main-header">
+            <div class="d-flex align-items-center logo-box justify-content-start">
+                <a href="#" class="waves-effect waves-light nav-link d-none d-md-inline-block mx-10 push-btn bg-transparent" data-toggle="push-menu" role="button">
+                    <span class="icon-Align-left"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
+                </a>
+                <!-- Logo -->
+                <a href="/" class="logo">
+                    <!-- logo-->
+                    <div class="logo-lg">
+                        <h3>Trang Chủ</h3>
+                    </div>
+                </a>
+            </div>
+        </header>
+
+        <aside class="main-sidebar" >
+            <!-- sidebar-->
+            <section class="sidebar">
+                <!-- sidebar menu-->
+                <ul class="sidebar-menu" data-widget="tree">                    
+
+                    <li class="header">Quản lý hệ thống</li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
+                            <span>Quản lý hệ thống</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-right pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            @*<li onclick="RenderUrl('/ThongKeDuLieu/')"><a href="#"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Thống kê dữ liệu</a></li>*@
+                            <li onclick="RenderUrl('/QuanLyThongSo/')"><a href="#"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Quản lý thông số</a></li>
+                            <li onclick="RenderUrl('/QuanLyCanhBao/')"><a href="#"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Quản lý cảnh báo</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+        </aside>
+
+        <div class="content-wrapper">
+            <div class="container-full">
+                <!-- Main content -->
+                <section class="content">
+
+                    <script src="~/Template/js/vendors.min.js"></script>
+                    <script src="~/Template/js/pages/chat-popup.js"></script>
+                    <script src="~/Template/assets/icons/feather-icons/feather.min.js"></script>
+
+                    <script src="~/Template/js/Template.js"></script>
+
+                    <script src="~/js/Toast/jquery.toast.js"></script>
+                    <script>
+                        function RenderUrl(url) {
+                            $("#Content").load(url, { 'ReLoad': 1 }, function () { });
+                            window.history.replaceState(null, null, url);
+                        }
+                        function showMessageSuccess(heading, text, hideAfter) {
+                            $.toast({
+                                heading: heading?? "Success",
+                                text: text ?? "Dữ liệu đã được cập nhật",
+                                position: 'top-right',
+                                loaderBg: '#ff6849',
+                                icon: 'success',
+                                hideAfter: hideAfter ?? 3500,
+                                stack: 6
+                            });
+                        }
+                        function showMessageError(heading, text, hideAfter) {
+                            $.toast({
+                                heading: heading ?? "Error",
+                                text: text ?? "Có lỗi sảy ra. Vui lòng thử lại sau",
+                                position: 'top-right',
+                                loaderBg: '#ff6849',
+                                icon: 'error',
+                                hideAfter: hideAfter ?? 3500
+
+                            });
+                        }
+                        function showMessageWarning(heading, text, hideAfter) {
+                            $.toast({
+                                heading: heading ?? "Error",
+                                text: text ?? "Có lỗi sảy ra.",
+                                position: 'top-right',
+                                loaderBg: '#ff6849',
+                                icon: 'warning',
+                                hideAfter: hideAfter ?? 3500
+
+                            });
+                        }
+                    </script>
+
+                    <div id="Content">
+
+                        @RenderBody()
+
+                    </div>
+                </section>
+                <!-- /.content -->
+            </div>
+        </div>
+        <div class="control-sidebar-bg"></div>
+
+    </div>
+
+</body>
+</html>

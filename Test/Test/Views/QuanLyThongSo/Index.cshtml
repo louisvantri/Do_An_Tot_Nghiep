@@ -1,0 +1,90 @@
+﻿
+@Styles.Render("~/Content/DataTableJSCSS")
+
+@{ 
+    if(Convert.ToInt32(ViewData["NoLayout"])==1)
+    {
+        Layout = null;
+    }
+}
+
+<script type="text/javascript" src="/assets/vendor_components/datatable/datatables.min.js"></script>
+<script>
+    function deleteModel(refreshAppdetail) {
+        document.getElementById("appdetail").innerHTML = "";
+        $("#appdetail").css("display", "none");
+        clearInterval(refreshAppdetail);
+    }
+</script>
+<!-- Main content -->
+@Html.AntiForgeryToken()
+
+<div class="notification" id="notification" style="display:none;width:200px; height:auto; position: fixed;top: 10px; right: 10px;padding: 10px; box-sizing:border-box; background-color: #f0f0f0;border: 1px solid #ccc; transition: opacity 0.5s ease-in-out; z-index:5;">
+    <audio id="notification__audio" controls style="display:none">
+        <source src="~/DataBase/ChuongCanhBao.mp3" type="audio/mp3"/>
+    </audio>
+    <h5 style="color:red; text-align:center">Cảnh báo</h5>
+    <hr style="width:100%"/>
+    <div id="notification__content"></div>
+</div>
+<div class="row mt-50">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header" style="display:flex;flex-direction: row;justify-content: space-between;">
+                <div>
+                    <h4 class="box-title">Quản lý thông số</h4>
+                    <h6 class="box-subtitle">Bao gồm các model cần quản lý</h6>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary float-right" id="btnDownloadExcel"><i class="fa fa-file-excel-o"></i> Xuất Dữ Liệu</button>
+                </div>
+            </div>
+            @*<div>
+                <button type="button" class="btn btn-outline" onclick="GetData()"><i class="fa fa-refresh mr-5"></i> Dừng</button>
+            </div>*@
+            <div class="box-body table-responsive">                
+                <div class="row overflow-auto">
+                    <form id="form__qlts" style="width:100%">
+                        <table class="display table table-hover table-condensed table-striped table-bordered" id="tbl__Models">
+                            <thead class="bg-dark">
+                                <tr>
+                                    <th style="text-align:center">BẢNG THÔNG SỐ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Tên Máy</td></tr>
+                                <tr><td>Thời Gian Xử Lý</td></tr>
+                                <tr><td>Số Sản Phẩm Đã Xử Lý</td></tr>
+                                <tr><td>Số Sản Phẩm Lỗi</td></tr>
+                            </tbody>
+                        </table>                        
+                    </form>
+                </div>
+                <div >
+                    <button type="button" class="btn btn-outline" onclick="GetData()"><i class="fa fa-refresh mr-5"></i> LÀM MỚI</button>
+                    <button type="submit" class="btn btn-primary float-right" id="btnSubmit"><i class="ti-save mr-5"></i> CẬP NHẬT</button>
+                </div>
+            </div>
+            <div class="row col-md-12">
+                <div class="box-body col-md-6">
+                    <h4 class="box-title">Biểu đồ thể hiện % lỗi của cả dây chuyền (%)</h4>
+                    <div>
+                        <canvas id="BieuDo1" height="277" width="417" style="display: block; width: 334px; height: 222px;"></canvas>
+                    </div>
+                </div>
+                <div class="box-body col-md-6">
+                    <h4 class="box-title">Biểu đồ thể hiện % lỗi của từng giai đoạn (%)</h4>
+                    <div>
+                        <canvas id="BieuDo2" height="277" width="417" style="display: block; width: 334px; height: 222px;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade appdetail show" id="appdetail" aria-modal="true" style="display: none; padding-right: 17px;"></div>
+
+<script src="~/js/ChartJS/Chart.min.js"></script>
+<script type="text/javascript" src="/js/QuanLyThongSo/QuanLyThongSo.js?v=1"></script>
